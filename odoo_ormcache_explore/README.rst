@@ -1,0 +1,2 @@
+Exploring Odoo @ormcache tool
+=============================
