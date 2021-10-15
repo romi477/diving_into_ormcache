@@ -49,6 +49,8 @@ class ResPartner(models.Model):
 
         info = self._get_occupation_info(self.occupation)
 
+        _log.info('PARTNER INFO: %s' % info)
+
         self.write({
             'occupation_info': info,
         })
