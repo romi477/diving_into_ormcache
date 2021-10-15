@@ -8,8 +8,11 @@
     'author': 'Raman K.',
     'license': 'LGPL-3',
     'summary': 'Odoo Ormcache Explore',
+    'depends': [
+        'sale_management',
+    ],
     'data': [
-
+        'views/res_partner_views.xml',
     ],
     'images': [
         'static/description/icon.png',
