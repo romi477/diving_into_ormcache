@@ -16,8 +16,8 @@
 					</group>
 
 					<button string="Call Cached Method" name="get_occupation_info" type="object"/>
-					<button string="LRU Cache" name="get_lru_cache" type="object"/>
-					<button string="LRU Cache Filter" name="get_lru_cache" type="object" context="{'_filter': True}"/>
+					<button string="GET LRU Cache" name="get_lru_cache" type="object"/>
+					<button string="FILTER LRU Cache" name="get_lru_cache" type="object" context="{'apply_filter': True}"/>
 					<button string="Clear Fields" name="clear_lru_cache_field" type="object"/>
 					<button string="Clear LRU" name="clear_lru_cache" type="object"/>
 

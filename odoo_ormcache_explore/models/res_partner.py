@@ -29,12 +29,12 @@ class ResPartner(models.Model):
         string='Filter',
     )
 
-    def _format_lru_cache_to_text(self, _filter):
+    def _format_lru_cache_to_text(self, apply_filter):
         _log.info('_format_lru_cache_to_text method!')
 
         lru_dict = self.pool._Registry__cache.d  # self.env.registry._Registry__cache.d
 
-        if _filter:
+        if apply_filter:
             names = self.filter_names.split(',')
             to_list = ['%s : %s' % (k, v) for k, v in lru_dict.items() if k[0] in names]
         else:
@@ -51,30 +51,28 @@ class ResPartner(models.Model):
         return 'The greatest %s %s' % (occupation, self.name)
 
     def get_occupation_info(self):
-        _log.info('get_occupation_info method!')
 
-        info = self.with_context(ctx_variable=self.filter_names)\
-            ._get_occupation_info(self.occupation)
+        # info = self.with_context(ctx_variable=self.filter_names)\
+        #     ._get_occupation_info(self.occupation)
 
-        _log.info('Partner Info: %s' % info)
+        info = self._get_occupation_info(self.occupation)
 
         self.write({
             'occupation_info': info,
         })
 
     def clear_lru_cache_field(self):
-        _log.info('clear_lru_cache_field method!')
 
         self.write({
             'lru_cache': False,
             'lru_cache_len': False,
+            'occupation_info': False,
         })
 
     def get_lru_cache(self):
-        _log.info('get_lru_cache method!')
 
         lru_cache_len, lru_cache_text = self._format_lru_cache_to_text(
-            self.env.context.get('_filter'),
+            self.env.context.get('apply_filter'),
         )
         self.write({
             'lru_cache': lru_cache_text,
